@@ -36,11 +36,11 @@ local function fcomp_default( a,b )
    return a < b 
 end
 
-local function getIndex(t, value, fcomp)
+local function getIndex(t, value, fcomp, _start, _end)
    local fcomp = fcomp or fcomp_default
 
-   local iStart = 1;
-   local iEnd = #t;
+   local iStart = _start or 1;
+   local iEnd = _end or #t;
    local iMid = 1;
    local iState = 0;
 
@@ -61,8 +61,9 @@ local function getIndex(t, value, fcomp)
    return (iMid+iState);
 end
 
-local function binsert(tbl, value, fcomp)
-   local idx = getIndex(tbl, value, fcomp);
+local function binsert(tbl, value, fcomp, _start, _end)
+   local idx = getIndex(tbl, value, fcomp, _start, _end);
+   print("BINSERT: " .. idx);
    insert( tbl, idx, value);
    
    return idx;

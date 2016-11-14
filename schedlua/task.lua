@@ -15,7 +15,7 @@ local Task_mt = {
 }
 
 function Task.init(self, aroutine, ...)
-
+    
 	local obj = {
 		routine = coroutine.create(aroutine), 
 	}
@@ -31,6 +31,7 @@ function Task.create(self, aroutine, ...)
 	-- either a function, or a table with a meta '__call'
 	-- implementation.  Checking with type == 'function'
 	-- is not good enough as it will miss the meta __call cases
+	
 
 	return self:init(aroutine, ...)
 end

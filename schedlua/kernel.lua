@@ -47,6 +47,10 @@ local function coop(priority, func, ...)
 	return Kernel.Scheduler:scheduleTask(task, {...});
 end
 
+local function spawnPriority(func, priority, ...)
+	return coop(priority, func, ...);
+end
+
 local function spawn(func, ...)
 	return coop(100, func, ...);
 end
@@ -149,6 +153,7 @@ local function globalize(tbl)
 	tbl["run"] = run;
 	tbl["coop"] = coop;
 	tbl["spawn"] = spawn;
+	tbl["spawnPriority"] = spawnPriority;
 	tbl["suspend"] = suspend;
 	tbl["yield"] = yield;
 
@@ -176,4 +181,3 @@ local Predicate = require("schedlua.predicate")
 local Alarm = require("schedlua.alarm")
 
 return globalize;
-

@@ -26,7 +26,15 @@ local function task1()
 end
 
 local function task2()
-	print("second task, only line")
+	print("second task, first line")
+	yield()
+	print("second task, second line")
+end
+
+local function task3()
+	print("third task, first line")
+	yield()
+	print("third task, second line")
 end
 
 local function counter(name, nCount)
@@ -34,14 +42,16 @@ local function counter(name, nCount)
 		print(name, num);
 		yield();
 	end
-	halt();
+	
 end
 
 local function main()
-	local t0 = spawn(counter, "counter1", 5)
-	local t1 = spawn(task1)
-	local t2 = spawn(task2)
-	local t3 = spawn(counter, "counter2", 7)
+	--local t0 = spawnPriority(counter, 8, "counter1", 5)
+	local t1 = spawnPriority(task1, 6);
+	--local t3 = spawnPriority(counter, 10, "counter2", 7);
+	local t2 = spawnPriority(task2, 4);
+	local t4 = spawnPriority(task3, 2);
+	
 end
 
 run(main)
